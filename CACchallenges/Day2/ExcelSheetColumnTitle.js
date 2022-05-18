@@ -31,12 +31,15 @@ var convertToTitle = function (columnNumber) {
   const BASE = 26;
   const LAST_LETTER = 'Z';
   let result = '';
+
   while (columnNumber > 0) {
     let rem = columnNumber % BASE;
-    result =
-      rem === 0
-        ? LAST_LETTER + result
-        : String.fromCharCode('A'.charCodeAt(0) + rem - 1) + result;
+    if (rem === 0) {
+      result = LAST_LETTER + result;
+      columnNumber = Math.floor(columnNumber / BASE) - 1;
+      continue;
+    }
+    result = String.fromCharCode('A'.charCodeAt(0) + rem - 1) + result;
     columnNumber = Math.floor(columnNumber / BASE);
   }
   return result;
