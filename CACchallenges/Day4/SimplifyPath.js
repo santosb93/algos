@@ -40,4 +40,20 @@ path is a valid absolute Unix path.
  * @param {string} path
  * @return {string}
  */
-var simplifyPath = function (path) {};
+var simplifyPath = function (path) {
+  const pathEls = path.split('/');
+  const stack = [];
+  for (let i = 0; i < pathEls.length; i++) {
+    if (pathEls[i] === '' || pathEls[i] === '.') continue;
+    if (pathEls[i] === '..') {
+      stack.pop();
+      continue;
+    }
+    stack.push(pathEls[i]);
+  }
+
+  return '/' + stack.join('/');
+};
+
+simplifyPath('/home//foo/');
+simplifyPath('/home/../foo/');
