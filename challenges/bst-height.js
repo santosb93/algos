@@ -23,7 +23,12 @@ and has 3 links.
 
 */
 
-const bstHeight = (tree) => {};
+const bstHeight = (tree) => {
+  if (!tree) return -1;
+  const leftHeight = bstHeight(tree.left);
+  const rightHeight = bstHeight(tree.right);
+  return 1 + Math.max(leftHeight, rightHeight);
+};
 
 /*
   Extension:

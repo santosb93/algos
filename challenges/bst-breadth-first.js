@@ -35,7 +35,16 @@ Utilizing recursion is not necessary, nor recommended.
 
 */
 
-const bfs = (root, callback) => {};
+const bfs = (root, callback) => {
+  const queue = [];
+  queue.push(root);
+  while (queue.length > 0) {
+    const curr = queue.shift();
+    callback(curr);
+    if (curr) queue.push(root.left);
+    if (curr) queue.push(root.right);
+  }
+};
 
 /*
 

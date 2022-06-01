@@ -13,7 +13,35 @@ function.
 
 */
 
-const bstSum = (root) => {};
+bst = new BinarySearchTree(10);
+bst.left = new BinarySearchTree(2);
+bst.left.left = new BinarySearchTree(1);
+bst.left.right = new BinarySearchTree(3);
+bst.left.right.right = new BinarySearchTree(4);
+
+const bstSum = (root) => {
+  // recursive divid and concuqer
+  if (!root) return 0;
+  return bstSum(root.left) + bstSum(root.right) + root.value;
+  // // // DFS preorder
+  // if (!root) return sum;
+  // sum += root.value;
+  // const leftSum = bstSum(root.left, sum);
+  // const totalSum = bstSum(root.right, leftSum);
+  // return totalSum;
+
+  // // BFS
+  // let total = 0;
+  // const queue = [root];
+  // while ((el = queue.shift())) {
+  //   total += el.value;
+  //   if (el.left) queue.push(el.left);
+  //   if (el.right) queue.push(el.right);
+  // }
+  // return total;
+};
+
+console.log(bstSum(bst));
 
 /*
 
