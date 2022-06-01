@@ -23,6 +23,7 @@ const bstSum = (root) => {
   // recursive divid and concuqer
   if (!root) return 0;
   return bstSum(root.left) + bstSum(root.right) + root.value;
+
   // // // DFS preorder
   // if (!root) return sum;
   // sum += root.value;

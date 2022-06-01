@@ -39,7 +39,15 @@ function.
 
 */
 
-const bstReverse = (root) => {};
+const bstReverse = (root) => {
+  if (!root) return;
+  const temp = root.left;
+  root.left = root.right;
+  root.right = temp;
+  bstReverse(root.left);
+  bstReverse(root.right);
+  return root;
+};
 
 /*
 
