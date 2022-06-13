@@ -55,16 +55,19 @@ function TreeNode(val, left, right) {
  * @return {number[][]}
  */
 var pathSum = function (root, targetSum) {
-  if (!root) return;
-  // if leaf and root.val - targetSum is zero, we have a path
-  if (!root.left && !root.right && root.val - targetSum === 0)
-    return [[root.val]];
-  // get the sum of the left tree
-  const leftResult = pathSum(root.left, targetSum - root.val);
-  // get the sum of the right tree
-  const rightResult = pathSum(root.right, targetSum - root.val);
-  const res = [...leftResult, ...rightResult];
-  return res.map((el) => [root.val, ...res]);
+  // if !root return []
+  if (!root) return [];
+  // if leaf and targetSum === root.val return [root.val]
+  if (!root.left && !root.right && targetSum === root.val) return [[root.val]];
+  // get leftPath, passing in targetSum - root.val
+  const leftPath = pathSum(root.left, targetSum - root.val);
+  // get rightPath, passing in targetSum - root.val
+  const rightPath = pathSum(root.right, targetSum - root.val);
+  // return the leftPath if it exists with the current root, return the right path if it exists with the current root
+  // join the two paths
+  const res = [...leftPath, ...rightPath];
+  // for each path, add the rootval
+  return res.map((el) => [root.val, ...el]);
 };
 
 const root = new TreeNode(1);
@@ -74,3 +77,16 @@ root.left = left;
 root.right = right;
 
 console.log('final result', pathSum(root, 3));
+
+/**
+ *   if (!root) return;
+  // if leaf and root.val - targetSum is zero, we have a path
+  if (!root.left && !root.right && root.val - targetSum === 0)
+    return [[root.val]];
+  // get the sum of the left tree
+  const leftResult = pathSum(root.left, targetSum - root.val);
+  // get the sum of the right tree
+  const rightResult = pathSum(root.right, targetSum - root.val);
+  const res = [...leftResult, ...rightResult];
+  return res.map((el) => [root.val, ...res]);
+ */

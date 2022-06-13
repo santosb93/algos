@@ -29,21 +29,31 @@ Constraints:
  * @return {number}
  */
 var mySqrt = function (x) {
-  // smallest input is 0 , greatest is (2**31) - 1 (2147483647)
-  // this means greatest sqrt can be 46340
-  let left = 0,
-    right = 46340,
-    mid;
-  if (x === 0) return left;
-  if (x >= 46340 ** 2) return right;
-  while (left + 1 < right) {
-    mid = Math.floor((right + left) / 2);
-    if (mid ** 2 < x) left = mid;
-    if (mid ** 2 > x) right = mid;
-    if (mid ** 2 === x) break;
-  }
-  return mid ** 2 > x ? mid - 1 : mid;
-};
+  // // smallest input is 0 , greatest is (2**31) - 1 (2147483647)
+  // // this means greatest sqrt can be 46340
+  // let left = 0,
+  //   right = x,
+  //   mid,
+  //   res;
+  // if (x === 0) return left;
+  // while (left + 1 < right) {
+  //   mid = Math.floor((right + left) / 2);
+  //   let res = mid ** 2;
+  //   if (res < x) left = mid;
+  //   if (res > x) right = mid;
+  //   if (res === x) break;
+  // }
+  // return res > x ? mid - 1 : mid;
 
-console.log(mySqrt(2147395600));
-//console.log(mySqrt(9));
+  /** yankun template */
+  let left = 0,
+    right = x;
+  while (left + 1 < right) {
+    mid = Math.floor((left + right) / 2);
+    const res = mid ** 2;
+    if (res < x) left = mid;
+    else if (res > x) right = mid;
+    else left = mid;
+  }
+  return right ** 2 <= x ? right : left;
+};

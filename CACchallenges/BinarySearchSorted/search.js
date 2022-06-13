@@ -31,10 +31,9 @@ nums is sorted in ascending order.
  * @return {number}
  */
 var search = function (nums, target) {
-  // assign left, and right the beginning and end indices
+  // assign left, and right the beginning and end ind
   let left = 0,
     right = nums.length - 1;
-  // check if left and right are already at the target
   if (nums[left] === target) return 0;
   if (nums[right] === target) return nums.length - 1;
   while (left + 1 < right) {

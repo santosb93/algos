@@ -57,7 +57,6 @@ var searchRange = function (nums, target) {
 
     // if nums[left] && nums[right] !== target return -1
     if (nums[left] !== target && nums[right] !== target) return -1;
-
     // if direction is left check left first
     if (direction == 'left') return nums[left] === target ? left : right;
     // if direction is right, check right first
