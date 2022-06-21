@@ -1,0 +1,50 @@
+/**
+ * Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+Input: grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+Output: 1
+
+ */
+
+/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function (grid) {
+  const H = grid.length;
+  const W = grid[0].length;
+  let count = 0;
+  for (let r = 0; r < H; r++) {
+    for (let c = 0; c < W; c++) {
+      if (grid[r][c] === '0') continue;
+
+      count++;
+      dfs(r, c);
+    }
+  }
+  return count;
+
+  function dfs(r, c) {
+    // if you hit out of bounds or water return
+    if (r < 0 || c < 0 || r === H || c === W) return;
+    if (grid[r][c] === '0') return;
+
+    // mark the spot that was visited
+    grid[r][c] = '0';
+    // check up
+    dfs(r - 1, c);
+    // check down
+    dfs(r + 1, c);
+    // check left
+    dfs(r, c - 1);
+    // check right
+    dfs(r, c + 1);
+  }
+};
