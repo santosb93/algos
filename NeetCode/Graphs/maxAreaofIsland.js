@@ -31,7 +31,6 @@ var maxAreaOfIsland = function (grid) {
       maxArea = Math.max(traverse(i, j), maxArea);
     }
   }
-
   return maxArea;
 
   function traverse(i, j, counter = 0) {
