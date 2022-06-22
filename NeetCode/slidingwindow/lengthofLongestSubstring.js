@@ -29,7 +29,23 @@ s consists of English letters, digits, symbols and spaces.
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
-  // create a cache to store the substrings
+  const cache = {};
+  let left = 0,
+    res = 0;
+  for (let right = 0; right < s.length; right++) {
+    cache[s[right]] = (cache[s[right]] || 0) + 1;
+    while (cache[s[right]] > 1) {
+      cache[s[left]]--;
+      left++;
+    }
+    res = Math.max(right - left + 1, res);
+  }
+  return res;
+};
+
+console.log(lengthOfLongestSubstring('abcacbcbb'));
+
+/**  // create a cache to store the substrings
   let cache = {};
   // create a left and right pointer to create a window
   let left = 0,
@@ -49,7 +65,4 @@ var lengthOfLongestSubstring = function (s) {
       longest = Math.max(longest, right - left);
     }
   }
-  return longest;
-};
-
-console.log(lengthOfLongestSubstring('abcacbcbb'));
+  return longest; */

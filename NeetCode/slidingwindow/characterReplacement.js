@@ -33,25 +33,19 @@ s consists of only uppercase English letters.
 var characterReplacement = function (s, k) {
   let left = 0,
     right = 0,
-    counter = 0,
-    maxCounter = 0,
+    res = 0,
     mostFrequent = 0,
     cache = {};
-  while (right < s.length) {
+  for (let right in s) {
     cache[s[right]] = (cache[s[right]] || 0) + 1;
     mostFrequent = Math.max(mostFrequent, cache[s[right]]);
-    counter++;
-    if (counter - mostFrequent > k) {
-      maxCounter = Math.max(counter - 1, maxCounter);
-      counter = 0;
+    while (right - left + 1 - mostFrequent > k) {
+      cache[s[left]]--;
       left++;
-      right = left;
-      cache = {};
-    } else {
-      right++;
     }
+    res = Math.max(res, right - left + 1);
   }
-  return Math.max(maxCounter, counter);
+  return res;
 };
 
 console.log(characterReplacement('AABABBA', 1));
