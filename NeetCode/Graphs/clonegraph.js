@@ -38,7 +38,7 @@ function Node(val, neighbors) {
  * @return {Node}
  */
 var cloneGraph = function (node) {
-  if (!node) return;
+  if (!node) return [];
   const visited = {};
   const traverse = (curr) => {
     visited[curr.val] = new Node(curr.val);
