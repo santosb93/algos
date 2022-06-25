@@ -28,6 +28,18 @@ returns 8, becuase 9 - 1 = 8
 */
 
 const bstMinMax = (root) => {
+  let min = Infinity;
+  let max = -Infinity;
+  const dfs = (node) => {
+    if (!node) return;
+    dfs(node.left);
+    dfs(node.right);
+    min = Math.min(min, node.value);
+    max = Math.max(max, node.value);
+  };
+  dfs(root);
+  return max - min;
+
   // BFS
   // let min = Infinity;
   // let max = -Infinity;

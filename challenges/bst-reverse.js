@@ -40,12 +40,12 @@ function.
 */
 
 const bstReverse = (root) => {
-  if (!root) return;
-  const temp = root.left;
-  root.left = root.right;
+  if (!root) return root;
+  const leftRes = bstReverse(root.left);
+  const rightRes = bstReverse(root.right);
+  const temp = leftRes;
+  root.left = rightRes;
   root.right = temp;
-  bstReverse(root.left);
-  bstReverse(root.right);
   return root;
 };
 

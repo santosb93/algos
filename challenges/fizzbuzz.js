@@ -16,7 +16,19 @@ fizzbuzz(16);
  * @param {} num
  * @returns array
  */
-const fizzbuzz = (num) => {};
+const fizzbuzz = (num) => {
+  const result = [];
+  // iterate from 1 to num
+  for (let i = 1; i <= num; i++) {
+    if (i % 3 === 0 && i % 5 === 0) result.push('fizzbuzz');
+    else if (i % 3 === 0) result.push('fizz');
+    else if (i % 5 === 0) result.push('buzz');
+    else result.push(i);
+  }
+  return result;
+};
+
+console.log(fizzbuzz(16));
 
 /*
 

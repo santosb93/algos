@@ -25,7 +25,25 @@ function Node(val) {
   this.next = null;
 }
 
-function kthToLastNode(k, head) {}
+function kthToLastNode(k, head) {
+  // create two pointers initiliazed to head
+  let left = head,
+    right = head;
+  // create a counter
+  let counter = 0;
+  // iterate until right === null
+  while (right) {
+    // increment counter
+    // right = right.next
+    counter++;
+    right = right.next;
+  }
+  while (left) {
+    if (counter === k) return left.value;
+    left = left.next;
+    counter--;
+  }
+}
 
 //Do not delete!
 module.exports = { Node, kthToLastNode };

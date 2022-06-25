@@ -31,6 +31,52 @@ function Node(val) {
 /*
 This method should add a node to the end of the doubly linked list
  */
-DoublyLinkedList.prototype.add = function (val) {};
+DoublyLinkedList.prototype.add = function (val) {
+  const newNode = new Node(val);
+  if (this.tail === null) {
+    this.tail = newNode;
+    this.head = newNode;
+    return;
+  }
+  this.tail.next = newNode;
+  newNode.prev = this.tail;
+  this.tail = newNode;
+};
+/*
+This method should remove the first instance of a node with the inputted value from the doubly linked list
+ */
+DoublyLinkedList.prototype.remove = function (val) {
+  // check if the head is the value
+  if (this.head.val === val) {
+    this.head.next.prev = null;
+    this.head = this.head.next;
+    return val;
+  }
+  // check if the tail is the value
+  if (this.tail.val === val) {
+    this.tail.prev.next = null;
+    this.tail = this.tail.prev;
+    return val;
+  }
+
+  // remove from middle;
+  let curr = this.head;
+  while (curr) {
+    if (curr.val === val) {
+      // assign the prev to the next
+      curr.prev.next = curr.next;
+      curr.next.prev = curr.prev;
+      return val;
+    }
+    curr = curr.next;
+  }
+};
+
+const test = new DoublyLinkedList();
+test.add(1);
+test.add(2);
+// console.log(test);
+test.remove(1);
+console.log(test);
 
 module.exports = { DoublyLinkedList, Node };

@@ -15,7 +15,10 @@ arr3 = [2, 100, 2000, 'dog', 3, 'lion'];
 commonElements(arr1, arr2, arr3) -> [2, 3, 2000, 'dog']
 */
 
-const commonElements = (...args) => {};
+const commonElements = (...args) => {
+  // iterate thorugh args
+
+};
 
 /*
 ** Extension **

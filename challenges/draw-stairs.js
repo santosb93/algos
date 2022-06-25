@@ -16,8 +16,25 @@ drawStairs(6) ->
 ******
 
 */
+//     * ( 5 spaces 1 star) i = 1 interation (n - 1) spaces (i stars)
+//    ** (4 spaces 2 stars)
+//   *** (3 spaces 3 starts)
+//  **** (2 spaces 4 star)
+// ***** (1 spaces 1 star)
+//****** (0 spaces 6 stars)
 
-const drawStairs = (n) => {};
+const drawStairs = (n) => {
+  if (n < 0) return '';
+  for (let i = 1; i <= n; i++) {
+    let row = '';
+    for (let j = 1; j <= n; j++) {
+      row += j <= n - i ? ' ' : '*';
+    }
+    console.log(row);
+  }
+};
+
+drawStairs(6);
 
 /* 
 

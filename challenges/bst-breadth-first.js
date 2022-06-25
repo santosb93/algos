@@ -33,16 +33,20 @@ there are no more nodes in the queue.
 
 Utilizing recursion is not necessary, nor recommended.
 
-*/
-
+/**
+ * 
+ * @param {*} root 
+ * @param {*} callback 
+ */
 const bfs = (root, callback) => {
-  const queue = [];
-  queue.push(root);
-  while (queue.length > 0) {
-    const curr = queue.shift();
-    callback(curr);
-    if (curr) queue.push(root.left);
-    if (curr) queue.push(root.right);
+  const queue = [root];
+  while (queue.length) {
+    for (let i = 0; i < queue.length; i++) {
+      const curr = queue.shift();
+      callback(curr.value);
+      if (curr.left) queue.push(curr.left);
+      if (curr.right) queue.push(curr.right);
+    }
   }
 };
 
@@ -94,6 +98,39 @@ neighbors are traversable and haven't already been visited.
 
 */
 
-const minimumDistance = (grid) => {};
+const minimumDistance = (grid) => {
+  console.log(grid[1][0]);
+  const queue = [[0, 0, 0]];
+  while (queue.length) {
+    console.log(grid);
+    for (let i = 0; i < queue.length; i++) {
+      const [r, c, distance] = queue.shift();
+      if (grid[r][c] === 2) return distance;
+      console.log(grid);
+      grid[r][c] = 'V';
+      // move down
+      if (r + 1 !== grid.length && grid[r + 1][c] !== 1)
+        queue.push([r + 1, c, distance + 1]);
+      // move up
+      if (r - 1 >= 0 && grid[r - 1][c] !== 1)
+        queue.push([r - 1, c, distance + 1]);
+      // move left
+      if (c - 1 >= 0 && grid[r][c - 1] !== 1)
+        queue.push([r, c - 1, distance + 1]);
+      // move right
+      if (c + 1 !== grid[0].length && grid[r][c + 1] !== 1)
+        queue.push([r, c + 1, distance + 1]);
+    }
+  }
+  return -1;
+};
+
+console.log(
+  minimumDistance([
+    [0, 0, 1, 1],
+    [0, 0, 1, 2],
+    [1, 0, 0, 0],
+  ])
+);
 
 module.exports = { BinarySearchTree, bfs, minimumDistance };
