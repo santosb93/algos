@@ -6,7 +6,14 @@ to the array prototype while solving the problem.
 
 */
 
-const reverseArray = (array) => {};
+const reverseArray = (array) => {
+  for (let i = 0; i < array.length / 2; i++) {
+    const temp = array[i];
+    array[i] = array[array.length - 1 - i];
+    array[array.length - 1 - i] = temp;
+  }
+  return array;
+};
 
 /*
 
@@ -22,6 +29,8 @@ input string will always have at least one word
 
 */
 
-const reverseSentence = (sentence) => {};
+const reverseSentence = (sentence) => {
+  return reverseArray(sentence.split(' ')).join(' ');
+};
 
 module.exports = { reverseArray, reverseSentence };

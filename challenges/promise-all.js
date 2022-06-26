@@ -19,6 +19,22 @@ for info on the Promise constructor.
 
 */
 
-const promiseAll = (promises) => {};
+const promiseAll = (promises) => {
+  let result = [];
+  const resultPromise = new Promise((res, rej) => {
+    promises.forEach((promise) => {
+      promise
+        .then((data) => {
+          result.push(data);
+          if (result.length === promises.length) {
+            console.log('result', result);
+            res(result);
+          }
+        })
+        .catch((err) => rej(err));
+    });
+  });
+  return resultPromise;
+};
 
 module.exports = { promiseAll };

@@ -39,7 +39,17 @@ function BinaryTree(value) {
   this.right = null;
 }
 
-// implement DFS, left, root, right
-const validBST = (tree, cache = {}, rootVal = tree.value) => {};
+const validBST = (tree, min = null, max = null) => {
+  if (!tree) return true;
+  if (max !== null && tree.value > max) {
+    return false;
+  }
+  if (min !== null && tree.value < min) {
+    return false;
+  }
+  const leftSide = validBST(tree.left, min, tree.value);
+  const rightSide = validBST(tree.right, tree.value, max);
+  return leftSide && rightSide;
+};
 
 module.exports = { BinaryTree, validBST };

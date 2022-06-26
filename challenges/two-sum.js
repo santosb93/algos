@@ -16,7 +16,14 @@
   Rational: No elements inside the array sum up to the target number
 */
 
-const twoSum = (arr, target) => {};
+const twoSum = (arr, target) => {
+  const cache = {};
+  for (let i = 0; i < arr.length; i++) {
+    if (cache[target - arr[i]]) return true;
+    cache[arr[i]] = true;
+  }
+  return false;
+};
 
 /*
 Extension:
@@ -28,6 +35,13 @@ The straightforward way to solve this problem would take O(n³) time. Is it poss
 
 */
 
-const threeSum = (arr, target) => {};
+const threeSum = (arr, target) => {
+  while (arr.length > 2) {
+    const el = arr.shift();
+    if (twoSum(arr, target - el)) return true;
+  }
+  return false;
+};
 
+console.log(threeSum([2, 5, 11, 15], 28));
 module.exports = { twoSum, threeSum };

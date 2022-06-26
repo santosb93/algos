@@ -27,8 +27,23 @@ O(n) time.
 */
 
 const twoSumClosest = (nums, target) => {
-  
+  const sortedNums = nums.sort();
+  let difference = Infinity;
+  let left = 0;
+  let right = sortedNums.length - 1;
+  let res = 0;
+  while (left !== right) {
+    const result = sortedNums[left] + sortedNums[right];
+    if (Math.abs(target - result) <= difference) {
+      difference = target - result;
+      res = result;
+    }
+    if (result < target) left++;
+    else if (result > target) right--;
+    else return target;
+  }
+  return res;
 };
 
-module.exports = {twoSumClosest};
-
+console.log(twoSumClosest([2, -3, -6, 7, 4], 3));
+module.exports = { twoSumClosest };

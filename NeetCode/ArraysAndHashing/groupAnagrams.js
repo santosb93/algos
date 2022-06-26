@@ -36,7 +36,6 @@ var groupAnagrams = function (strs) {
     if (cache[count]) cache[count].push(str);
     else cache[count] = [str];
   });
-  console.log(cache);
   return Object.values(cache);
 };
 

@@ -22,7 +22,17 @@ is within "depth 3". No number is deeper.
 
 */
 
-const retrieveDepth = (arr, depth, result = []) => {};
+const retrieveDepth = (arr, depth) => {
+  const result = [];
+  depth = depth - 1;
+  if (depth < 0) return [];
+  for (let i = 0; i < arr.length; i++) {
+    Array.isArray(arr[i])
+      ? result.push(...retrieveDepth(arr[i], depth))
+      : result.push(arr[i]);
+  }
+  return result;
+};
 
 /*
 
@@ -52,5 +62,7 @@ flattened array
 */
 
 const flattenDepth = (arr, depth) => {};
+
+console.log(flattenDepth([2, [4, [7], 1], 5], 2));
 
 module.exports = { retrieveDepth, flattenDepth };
