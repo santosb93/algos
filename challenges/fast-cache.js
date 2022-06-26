@@ -4,13 +4,27 @@
  Every subsequent call to that returned function with the same argument will return the output directly from the object, instead of invoking the original function again.
 */
 
-const fastCache = (func) => {};
+const fastCache = (func) => {
+  const cache = {};
+  return (input) => {
+    if (!cache.hasOwnProperty(input)) cache[input] = func(input);
+    return cache[input];
+  };
+};
 
 /*
  Extension: Rewrite fastCache so it can handle array or object input, and any number of arguments.
  HINT: you might need to use the spread operator...
 */
 
-const fastCacheAdvanced = (func) => {};
+const fastCacheAdvanced = (func) => {
+  const cache = {};
+  return (...input) => {
+    console.log('cache', cache);
+    const inputString = JSON.stringify([...input]);
+    if (!cache.hasOwnProperty(inputString)) cache[inputString] = func(...input);
+    return cache[inputString];
+  };
+};
 
 module.exports = { fastCache, fastCacheAdvanced };

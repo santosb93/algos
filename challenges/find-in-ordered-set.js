@@ -17,7 +17,18 @@ findInOrderedSet(nums, 2);  -> false
 // if element < target return true
 // else if element ==== target return true
 
-const findInOrderedSet = (array, target) => {};
+const findInOrderedSet = (array, target) => {
+  let left = 0;
+  let right = array.length - 1;
+  while (left + 1 < right) {
+    const mid = Math.floor((left + right) / 2);
+    const res = array[mid];
+    if (res < target) left = mid;
+    else if (res > target) right = mid;
+    else return true;
+  }
+  return array[left] === target || array[right] === target;
+};
 
 /*
 Extension:
@@ -28,16 +39,46 @@ The matrix has the following properties:
   - The *last* element in each subarray is smaller than than the *first* element in each following subarray  
 
 ex:
-const matrix = [
-  [-3, -1,  2,  4,  5],
-  [ 6,  7,  8, 13, 37],
-  [41, 49, 50, 61, 75]
-];
+  const matrix = [
+    [-3, -1,  2,  4,  5],
+    [ 6,  7,  8, 13, 37],   
+    [41, 49, 50, 61, 75]
+  ];
 findIn2dMatrix(matrix, 13); -> true
 findIn2dMatrix(matrix, 42); -> false
 
 */
 
-const findIn2dMatrix = (matrix, target) => {};
+const findIn2dMatrix = (matrix, target) => {
+  const convert = (index) => {
+    return {
+      row: Math.floor(index / matrix[0].length),
+      col: index % matrix[0].length,
+    };
+  };
+  let left = 0,
+    right = matrix.length * matrix[0].length;
+  right--;
+  while (left + 1 < right) {
+    const mid = Math.floor((left + right) / 2);
+    const { row, col } = convert(mid);
+    const res = matrix[row][col];
+    if (res < target) left = mid;
+    else if (res > target) right = mid;
+    else return true;
+  }
+  const leftRes = convert(left);
+  const rightRes = convert(right);
+  return (
+    matrix[leftRes.row][leftRes.col] === target ||
+    matrix[rightRes.row][rightRes.col] === target
+  );
+};
+const matrix = [
+  [-3, -1, 2, 4, 5],
+  [6, 7, 8, 13, 37],
+  [41, 49, 50, 61, 75],
+];
+console.log(findIn2dMatrix(matrix));
 
 module.exports = { findInOrderedSet, findIn2dMatrix };
